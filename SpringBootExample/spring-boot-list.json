@@ -1,0 +1,124 @@
+{
+  "kind": "List",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "spring-boot-service-example"
+  },
+  "items": [
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "spring-boot-service",
+        "labels": {
+          "name": "spring-boot"
+        }
+      },
+      "spec": {
+        "selector": {
+          "name": "spring-boot"
+        },
+        "ports": [
+          {
+            "name": "spring-boot-service-port",
+            "protocol": "TCP",
+            "port": 27017,
+            "targetPort": 8080
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "spring-boot-route",
+        "labels": {
+          "name": "spring-boot"
+        }
+      },
+      "spec": {
+        "to": {
+          "name": "spring-boot-service"
+        },
+        "tls": {
+          "termination": "edge"
+        }
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "spring-boot-deployment-config",
+        "labels": {
+          "name": "spring-boot"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Recreate",
+          "resources": {}
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "spring-boot"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "name": "spring-boot"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "spring-boot",
+                "image": "sanrocks123/spring-boot:latest",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
+                "securityContext": {
+                  "capabilities": {},
+                  "privileged": false
+                },
+                "livenessProbe": {
+                  "tcpSocket": {
+                    "port": 8080
+                  },
+                  "timeoutSeconds": 1,
+                  "initialDelaySeconds": 10
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": "",
+            "nodeSelector": {
+              "region": "primary"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

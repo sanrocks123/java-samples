@@ -1,0 +1,23 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "webportal-service",
+    "labels": {
+      "name": "webportal"
+    }
+  },
+  "spec": {
+    "selector": {
+      "name": "webportal"
+    },
+    "ports": [
+      {
+        "name": "webportal-service-port",
+        "protocol": "TCP",
+        "port": 27017,
+        "targetPort": 8080
+      }
+    ]
+  }
+}

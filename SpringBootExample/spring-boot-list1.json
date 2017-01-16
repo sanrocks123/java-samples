@@ -1,0 +1,93 @@
+{
+  "kind": "List",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "webportal-list"
+  },
+  "items": [
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "webportal-route",
+        "labels": {
+          "name": "webportal"
+        }
+      },
+      "spec": {
+        "to": {
+          "kind": "Service",
+          "name": "webportal-svc"
+        },
+        "tls": {
+          "termination": "edge"
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "webportal-svc",
+        "labels": {
+          "name": "webportal"
+        }
+      },
+      "spec": {
+        "selector": {
+          "name": "webportal"
+        },
+        "ports": [
+          {
+            "name": "webportal-service-port",
+            "protocol": "TCP",
+            "port": 27017,
+            "targetPort": 8080
+          }
+        ]
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "webportal-dc"
+      },
+      "spec": {
+        "template": {
+          "metadata": {
+            "labels": {
+              "name": "webportal"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "webportal",
+                "image": "registry.paas.symcpe.com:443/dcs-cloud/webportal:latest",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "replicas": 1,
+        "selector": {
+          "name": "webportal"
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "strategy": {
+          "type": "Rolling"
+        }
+      }
+    }
+  ]
+}

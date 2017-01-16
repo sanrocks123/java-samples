@@ -1,0 +1,12 @@
+10,A,Denver,100000
+10,B,Houston,110000
+10,C,New York,90000
+10,D,Houston,95000
+20,F,Houston,120000
+20,G,New York,90000
+20,H,New York,90000
+20,I,Houston,125000
+30,J,Houston,92000
+30,K,Denver,102000
+30,L,Denver,102000
+30,M,Houston,85000

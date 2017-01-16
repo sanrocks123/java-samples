@@ -1,0 +1,19 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "spring-boot-route",
+    "labels": {
+      "name": "spring-boot"
+    }
+  },
+  "spec": {
+	"to": {
+      "kind": "Service",
+      "name": "spring-boot-service"
+    },
+    "tls": {
+      "termination": "edge"
+    }
+  }
+}
