@@ -36,51 +36,49 @@ import java.util.concurrent.CyclicBarrier;
 
 class BarrierThread implements Runnable {
 
-    private CyclicBarrier barrier;
-    private String name;
+	private CyclicBarrier barrier;
+	private String name;
 
-    /**
-     * 
-     */
-    public BarrierThread(CyclicBarrier barrier) {
-        this.barrier = barrier;
-    }
+	/**
+	 * 
+	 */
+	public BarrierThread(CyclicBarrier barrier) {
+		this.barrier = barrier;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Runnable#run()
-     */
-    @Override
-    public void run() {
-        name = Thread.currentThread().getName();
-        try {
-            int sleepTime = new Random().nextInt(10) * 1000;
-            System.out.println(name + " is working for approx. " + sleepTime + " secs...");
-            Thread.sleep(sleepTime);
-            System.out.println(name + " is UP...");
-            barrier.await();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		name = Thread.currentThread().getName();
+		try {
+			int sleepTime = new Random().nextInt(10) * 1000;
+			System.out.println(name + " is working for approx. " + sleepTime + " secs...");
+			Thread.sleep(sleepTime);
+			System.out.println(name + " is UP...");
+			barrier.await();
 
-        } catch (InterruptedException | BrokenBarrierException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (InterruptedException | BrokenBarrierException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 public class CyclicBarrierDemo {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        CyclicBarrier barrier = new CyclicBarrier(3, new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("All services are UP & Running... Lets play game...");
-            }
-        });
-        new Thread(new BarrierThread(barrier)).start();
-        new Thread(new BarrierThread(barrier)).start();
-        new Thread(new BarrierThread(barrier)).start();
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		CyclicBarrier barrier = new CyclicBarrier(3, () -> {
+			System.out.println("All services are UP & Running... Lets play game...");
+		});
+		new Thread(new BarrierThread(barrier)).start();
+		new Thread(new BarrierThread(barrier)).start();
+		new Thread(new BarrierThread(barrier)).start();
+	}
 }

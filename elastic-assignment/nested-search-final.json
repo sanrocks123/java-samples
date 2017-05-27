@@ -1,0 +1,77 @@
+// search for legal account
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "LegalAccount.LegalAccountId": "LA8000"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+// nested search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "nested": {
+            "path": "LegalAccount.Portfolio",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "match": {
+                      "LegalAccount.Portfolio.PortfolioId": "PORT300"
+                    }
+                  }
+                ]
+              }
+            },
+            "inner_hits": {}
+          }
+        },
+        {
+          "nested": {
+            "path": "LegalAccount.Portfolio.AccountExtended",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "match": {
+                      "LegalAccount.Portfolio.AccountExtended.AccountId": "ACC602"
+                    }
+                  }
+                ]
+              }
+            },
+            "inner_hits": {}
+          }
+        },
+        {
+          "nested": {
+            "path": "LegalAccount.Party",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "match": {
+                      "LegalAccount.Party.PartyId": "PA100"
+                    }
+                  }
+                ]
+              }
+            },
+            "inner_hits": {}
+          }
+        }
+      ]
+    }
+  }
+}

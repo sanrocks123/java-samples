@@ -1,0 +1,51 @@
+
+// nested search
+{
+  "query": {
+    "nested": {
+      "path": "LegalAccount.Portfolio",
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match": {
+                "LegalAccount.Portfolio.PortfolioId": "PORT301"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+
+// inner hits
+{
+   "query": {
+    "nested": {
+      "path": "LegalAccount.Portfolio.AccountExtended",
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match": {
+                "LegalAccount.Portfolio.AccountExtended.AccountId": "ACC602"
+              }
+            }
+          ]
+        }
+      },
+      "inner_hits":{}
+    }
+  }
+}
+
+// fuzzy search
+{
+  "query": {
+    "query_string": {
+      "query": "Mukesh"
+    }
+  }
+}

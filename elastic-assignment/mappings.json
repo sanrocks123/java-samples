@@ -1,0 +1,23 @@
+{
+  "mappings": {
+    "data": {
+      "properties": {
+        "LegalAccount": {
+          "properties": {
+            "Portfolio": {
+              "type": "nested",
+              "properties": {
+                "AccountExtended": {
+                  "type": "nested"
+                }
+              }
+            },
+            "Party": {
+              "type": "nested"
+            }
+          }
+        }
+      }
+    }
+  }
+}

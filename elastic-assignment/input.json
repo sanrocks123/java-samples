@@ -1,0 +1,97 @@
+{
+  "LegalAccount": {
+    "LegalAccountId": "LA8000",
+    "LegalAccountName": "Reliance Industries",
+    "LegalAccountOpenDate": "2013-09-01",
+    "Portfolio": [
+      {
+        "PortfolioId": "PORT300",
+        "PortfolioName": "Single",
+        "AccountExtended": [
+          {
+            "AccountId": "ACC600",
+            "TapsAccountNumber": "TAPS500",
+            "DESI": "DESI700"
+          },
+          {
+            "AccountId": "ACC601",
+            "TapsAccountNumber": "TAPS501",
+            "DESI": "DESI701"
+          }
+        ]
+      },
+      {
+        "PortfolioId": "PORT301",
+        "PortfolioName": "APAC",
+        "AccountExtended": [
+          {
+            "AccountId": "ACC602",
+            "TapsAccountNumber": "TAPS502",
+            "DESI": "DESI702"
+          },
+          {
+            "AccountId": "ACC603",
+            "TapsAccountNumber": "TAPS503",
+            "DESI": "DESI703"
+          }
+        ]
+      }
+    ],
+    "Party": [
+      {
+        "PartyId": "PA100",
+        "FirstName": "Mukesh",
+        "LastName": "Ambani"
+      },
+      {
+        "PartyId": "PA101",
+        "FirstName": "Neeta",
+        "LastName": "Ambani"
+      }
+    ]
+  }
+},
+
+
+
+// nested party
+
+{
+  "LegalAccount": {
+    "LegalAccountId": "LA8001",
+    "LegalAccountName": "Kingfisher Airlines",
+    "LegalAccountOpenDate": "2013-08-01",
+    "Portfolio": [
+      {
+        "PortfolioId": "PORT303",
+        "PortfolioName": "Single",
+        "AccountExtended": [
+          {
+            "AccountId": "ACC604",
+            "TapsAccountNumber": "TAPS504",
+            "DESI": "DESI704"
+          },
+          {
+            "AccountId": "ACC605",
+            "TapsAccountNumber": "TAPS505",
+            "DESI": "DESI704"
+          }
+        ]
+      }
+    ],
+    "Party": [
+      {
+        "PartyId": "PA101",
+        "FirstName": "Vijay",
+        "LastName": "Mallaya"
+      },
+      {
+        "PartyId": "PA101",
+        "FirstName": "Neeta",
+        "LastName": "Ambani"
+      }
+    ]
+  }
+}
+
+
