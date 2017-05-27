@@ -1,3 +1,1 @@
-
-
-Practice repo for java programming
+Practice repo
