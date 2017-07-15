@@ -1,1 +1,4 @@
+Pipeline('PipelineDemo'){
+  echo 'HelloWorld'
 
+}
